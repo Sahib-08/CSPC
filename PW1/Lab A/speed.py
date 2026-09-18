@@ -21,4 +21,6 @@ end = time.perf_counter()
 
 slow = end - start
 
+print("Loop version: " + str(slow) + " seconds")
+print("Numpy version: " + str(fast) + " seconds")
 print("The fast vectorized version is " + str(slow / fast) + " times faster than the slow, loop based version.")
