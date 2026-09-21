@@ -9,11 +9,12 @@ Complete the TODOs below. Run with:  python plot.py
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
-from pathlib import Path
+import sys
 
 LAMBDA = 0.3     # decay constant, given
 
-file = Path(__file__).parent / "decay_observed.csv" # I added this because vscode wont let me run the .py file otherwise without me putting the file at the CSPC root folder
+file = sys.argv[1]
+output = sys.argv[2]
 
 t = []
 observed = []
@@ -41,4 +42,4 @@ fig.supxlabel("Time")
 fig.supylabel("Atoms")
 
 plt.tight_layout()
-plt.savefig("decay_plot.png")
+plt.savefig(output)
