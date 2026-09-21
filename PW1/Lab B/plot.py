@@ -8,18 +8,37 @@ Complete the TODOs below. Run with:  python plot.py
 
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
+from pathlib import Path
 
 LAMBDA = 0.3     # decay constant, given
 
-# TODO 1: read decay_observed.csv (columns: time, count; skip the header row)
-#         and split it into two arrays: t and observed.
+file = Path(__file__).parent / "decay_observed.csv" # I added this because vscode wont let me run the .py file otherwise without me putting the file at the CSPC root folder
 
-# TODO 2: set N0 to the FIRST observed value, then build the analytical curve
-#         analytical = N0 * exp(-LAMBDA * t)
+t = []
+observed = []
 
-# TODO 3: make a 1x2 subplot with SHARED x and y axes.
-#         left panel : scatter of the observed data, titled "Observed data"
-#         right panel: line plot of the analytical curve, titled "Analytical"
-#         label the axes.
+with open(file) as f:
+    reader = csv.DictReader(f)
 
-# TODO 4: save the figure as figure.png
+    for row in reader:
+        t.append(float(row["time"]))
+        observed.append(int(row["count"]))
+
+N0 = observed[0]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, sharex=True, sharey=True, figsize=(8, 4))
+
+ax1.scatter(t, observed, color='blue')
+ax1.set_title('Observed data')
+
+t_vals = np.array(t)
+analytical = N0 * np.exp(-LAMBDA * t_vals)
+ax2.plot(t_vals, analytical, color='red', marker='o')  
+ax2.set_title('Analytical')
+
+fig.supxlabel("Time")
+fig.supylabel("Atoms")
+
+plt.tight_layout()
+plt.savefig("decay_plot.png")
