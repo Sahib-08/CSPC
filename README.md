@@ -20,3 +20,10 @@ Create the environment for a given lab:
 
 **Conclusion:**
 - I learned that the speed of the numpy version of the algorithm is highly variable compared to the loop based one. In the runs I made, the loop based algorithm takes anywhere from 22.8 to 24.1 seconds, the difference between the two values being around 5%, while the numpy algorithm ranges from 0.016 to 0.028 seconds, a whopping 75% difference.
+
+## PW1 - Lab B
+**About Snakemake:**
+- Snakemake takes input(s) and output(s) and gives it to a program as an argument when you run it, but it only executes the program if the input is newer than the output.
+
+**Conclusion:**
+- The data matched the analytical law, except for the fact that there was a problem with the dataset. From t = 13.5 to t = 14, from 16 to 16.5 and 17 to 17.5, the number of atoms increased, which should never happen.
