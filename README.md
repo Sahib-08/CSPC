@@ -27,3 +27,10 @@ Create the environment for a given lab:
 
 **Conclusion:**
 - The data matched the analytical law, except for the fact that there was a problem with the dataset. From t = 13.5 to t = 14, from 16 to 16.5 and 17 to 17.5, the number of atoms increased, which should never happen.
+
+## PW2 - Lab A
+**Derivation Amplification:**
+- When taking derivative of position and velocity, I saw that derivation amplified noise, this is because the derivative calculates rapid changes, so even small measurement errors that tip off the graph from being a perfect parabola/line have a big difference on the resulting derivative.
+
+**Results**
+- Mean acceleration was found to be around -8.58m/s^2, but variation was high, rapidly increasing and decreasing dozens of meters per second squared because of amplified noise from derivation.
