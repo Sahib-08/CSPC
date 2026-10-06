@@ -34,3 +34,7 @@ Create the environment for a given lab:
 
 **Results**
 - Mean acceleration was found to be around -8.58m/s^2, but variation was high, rapidly increasing and decreasing dozens of meters per second squared because of amplified noise from derivation.
+
+## PW2 - Lab B
+**Finding the minimum**
+- All the methods reached the absolute minimum, except for Newton's method, which looks for the closest stationary point, no matter if it's minimum or maximum. For Newton's method, since for x=0 and x=2 the closest stationary point was different, Newton's method gave different values.
