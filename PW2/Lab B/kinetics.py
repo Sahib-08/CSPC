@@ -9,14 +9,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 
-# TODO 1: read kinetics.csv (columns time, concentration) into arrays t, C.
-#         Set C0 = the first concentration.
 
-# TODO 2: write total_error(k) = sum of (measured - C0*exp(-k*t))^2.
-#         This is the "how bad" number: small when the model matches the data.
+t, C = np.loadtxt("kinetics.csv", delimiter=",", skiprows=1, unpack=True)
+C0 = C[0]
 
-# TODO 3: minimise total_error with scipy.optimize.minimize (method "SLSQP",
-#         bounds [(0, 5)], start x0=0.5). Print the fitted k.
+def total_error(k):
+    return np.sum((C - C0*np.exp(-k * t)) ** 2)
 
-# TODO 4: plot the measured data (points) and your fitted curve (line) together.
-#         Save as kinetics.png.
+
+result = minimize(total_error, method="SLSQP", bounds=[(0, 5)], x0=0.5)
+print("Fitted k:", result.x[0])
+
+t_fit = np.linspace(t.min(), t.max(), 200)
+C_fit = C0 * np.exp(-result.x[0] * t_fit)
+plt.scatter(t, C, label="Measured data")
+plt.plot(t_fit, C_fit, label="Fitted curve")
+plt.xlabel("Time")
+plt.ylabel("Concentration")
+plt.legend()
+plt.tight_layout()
+plt.savefig("kinetics.png")
+plt.show()
