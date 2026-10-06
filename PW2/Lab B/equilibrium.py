@@ -15,16 +15,34 @@ from scipy.optimize import newton, minimize
 K = 15.6
 a = b = 1.0
 
-# TODO 1: write k_imbalance(x) = (2x)^2/((a-x)(b-x)) - K.
-#         It equals zero exactly at equilibrium.
 
-# TODO 2 (method 1): use scipy.optimize.newton to find the root of k_imbalance
-#         (start x0=0.5). This is root-finding.
+def k_imbalance(x):
+    return (2 * x) ** 2 / ((a - x) * (b - x)) - K
 
-# TODO 3 (method 2): use scipy.optimize.minimize to minimise k_imbalance(x)**2
-#         (method "SLSQP", bounds [(0, 0.999)], x0=[0.5]). Print both answers
-#         and confirm they agree.
 
-# TODO 4: report the equilibrium amounts (H2, I2, HI), and plot how the three
-#         amounts change with the extent x, marking the equilibrium. Save
-#         equilibrium.png.
+x_newton = newton(k_imbalance, x0=0.5)
+
+def objective(x):
+    return k_imbalance(x[0]) ** 2
+
+result = minimize(objective, x0=[0.5], method="SLSQP", bounds=[(0, 0.999)]
+)
+
+print("Equilibrium extent:")
+print("  Newton method: x =", x_newton)
+print("  Minimization: x =", result.x[0])
+
+print("H2 =", 1 - x_newton, "mol")
+print("I2 =", 1 - x_newton, "mol")
+print("HI =", 2 * x_newton, "mol")
+
+x = np.linspace(0, 0.999, 100)
+plt.plot(x, 1 - x, label="H2")
+plt.plot(x, 1 - x, label="I2")
+plt.plot(x, 2 * x, label="HI")
+plt.axvline(x_newton, linestyle="--", color="black")
+plt.xlabel("Extent x")
+plt.ylabel("Amount (mol)")
+plt.legend()
+plt.savefig("equilibrium.png")
+plt.show()
