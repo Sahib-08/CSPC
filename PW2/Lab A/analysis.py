@@ -57,10 +57,6 @@ plt.title("Integrated Position over Time")
 plt.show()
 
 
-# TODO 4: make a figure with 3 stacked panels: position, velocity, acceleration
-#         vs time. Mark the true -9.81 line on the acceleration panel.
-#         Save it as motion.png
-
 fig, axes = plt.subplots(3, 1, figsize=(8, 10), sharex=True)
 
 axes[0].plot(t, y)
